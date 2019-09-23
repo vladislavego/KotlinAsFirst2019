@@ -128,7 +128,8 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  */
 fun accountInThreeYears(initial: Int, percent: Int): Double {
     val per = percent / 100.0
-    return initial + initial * per * (3 + initial * per * (2 + initial * per))
+    val years = 3
+    return initial * (1 + per).pow(years)
 }
 /**
  * Простая
