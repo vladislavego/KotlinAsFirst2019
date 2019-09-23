@@ -48,9 +48,14 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
 /**
  * Пример главной функции
  */
-fun main() {
+fun main(args: Array<String>) {
     val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
     println("Root product: $x1x2")
+    //val result = sqr(7)
+    //val result = sqr(5)
+    //printl("result = $result
+    //println("7 * 7 = $result")
+
 }
 
 /**
@@ -59,22 +64,20 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int {
-    val inSec = hours * 3600 + minutes * 60 + seconds
-    return inSec
-}
+fun seconds(hours: Int, minutes: Int, seconds: Int) = hours * 3600 + minutes * 60 + seconds
+
+
 
 /**
  * Тривиальная
  *
  * Пользователь задает длину отрезка в саженях, аршинах и вершках (например, 8 саженей 2 аршина 11 вершков).
- * Определить длину того же отрезка в метрах (в данном случае 18.98).
+ * Определить длину того же отрезка в метрах (в данном слчае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
     val inVershoks = sagenes * 48 + arshins * 48 / 3 + vershoks
-    val inMeters = inVershoks * 4.445 / 100
-    return inMeters
+    return inVershoks * 4.445 / 100
 }
 
 /**
@@ -85,8 +88,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  */
 fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
     val inSec = deg * 3600 + min * 60 + sec
-    val inRadian = inSec / ((180 * 3600) / PI)
-    return inRadian
+    return inSec / ((180 * 3600) / PI)
 }
 
 /**
@@ -112,15 +114,10 @@ fun thirdDigit(number: Int): Int = (number / 100) % 10
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-   /* val hoursInTravel = hoursArrive - hoursDepart
-    val minutesInTravel = minutesArrive - minutesDepart
-    val timeInMinutes = hoursInTravel * 60 + minutesInTravel
-    return timeInMinutes
-    */
-    return (hoursArrive - hoursDepart) * 60 + (minutesArrive - minutesDepart)
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int)
+    = (hoursArrive - hoursDepart) * 60 + (minutesArrive - minutesDepart)
 
-}
+
 
 /**
  * Простая
@@ -135,6 +132,7 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
     val afterTwoYears = afterOneYear + afterOneYear * per
     val afterThreeYears = afterTwoYears + afterTwoYears * per
     return afterThreeYears
+
 }
 
 /**
@@ -147,6 +145,5 @@ fun numberRevert(number: Int): Int {
     val firstDigit = number % 10
     val secondDigit = (number / 10) % 10
     val thirdDigit = number / 100
-    val invertedNumber = firstDigit * 100 + secondDigit * 10 + thirdDigit
-    return invertedNumber
+    return firstDigit * 100 + secondDigit * 10 + thirdDigit
 }
