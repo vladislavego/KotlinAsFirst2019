@@ -137,7 +137,12 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int = when {
+    a + b <= c || a + c <= b || b + c <= a -> -1
+    max(a, max(b, c)) * max(a, max(b, c)) > a * a + b * b + c * c - max(a, max(b, c)) * max(a, max(b, c)) -> 2
+    max(a, max(b, c)) * max(a, max(b, c)) == a * a + b * b + c * c - max(a, max(b, c)) * max(a, max(b, c)) -> 1
+    else -> 0
+}
 
 /**
  * Средняя
