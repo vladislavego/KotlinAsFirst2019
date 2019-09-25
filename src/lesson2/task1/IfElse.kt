@@ -122,7 +122,12 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    return if (rookX == kingX || rookY == kingY && (bishopX + bishopY - kingX - kingY) % 2 == 0) 3
+    else if (rookX == kingX || rookY == kingY) 1
+    else if ((bishopX + bishopY - kingX - kingY) % 2 == 0) 2
+    else 0
+}
 
 /**
  * Простая
