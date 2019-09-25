@@ -84,8 +84,8 @@ fun timeForHalfWay(
 ): Double {
     val halfWay = (t1 * v1 + t2 * v2 + t3 * v3) / 2
     return if (t1 * v1 >= halfWay) halfWay / v1
-           else if (t1 * v1 + t2 * v2 >= halfWay) (halfWay - v1 * t1) / v2 + t1
-           else (halfWay - v1 * t1 - v2 * t2) / v3 + t1 + t2
+    else if (t1 * v1 + t2 * v2 >= halfWay) (halfWay - v1 * t1) / v2 + t1
+    else (halfWay - v1 * t1 - v2 * t2) / v3 + t1 + t2
 }
 
 /**
@@ -101,7 +101,12 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = TODO()
+): Int {
+    return if (rookX1 == kingX || rookY1 == kingY && rookX2 == kingX || rookY2 == kingY) 3
+    else if (rookX1 == kingX || rookY1 == kingY) 1
+    else if (rookX2 == kingX || rookY2 == kingY) 2
+    else 0
+}
 
 /**
  * Простая
