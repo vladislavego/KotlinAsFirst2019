@@ -64,9 +64,9 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String = when {
-    age > 10 && age < 15 || age > 110 && age < 115 -> "$age лет"
+    age in 11..14 || age in 111..114 -> "$age лет"
     age % 10 == 1 -> "$age год"
-    age % 10 > 1 && age % 10 < 5 -> "$age года"
+    age % 10 in 2..4 -> "$age года"
     else -> "$age лет"
 }
 
@@ -82,10 +82,13 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
+
     val halfWay = (t1 * v1 + t2 * v2 + t3 * v3) / 2
-    return if (t1 * v1 >= halfWay) halfWay / v1
-    else if (t1 * v1 + t2 * v2 >= halfWay) (halfWay - v1 * t1) / v2 + t1
-    else (halfWay - v1 * t1 - v2 * t2) / v3 + t1 + t2
+    return when {
+        (t1 * v1 >= halfWay) -> halfWay / v1
+        (t1 * v1 + t2 * v2 >= halfWay) -> (halfWay - v1 * t1) / v2 + t1
+        else -> (halfWay - v1 * t1 - v2 * t2) / v3 + t1 + t2
+    }
 }
 
 /**
@@ -139,8 +142,8 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int = when {
     a + b <= c || a + c <= b || b + c <= a -> -1
-    max(a, max(b, c)) * max(a, max(b, c)) > a * a + b * b + c * c - max(a, max(b, c)) * max(a, max(b, c)) -> 2
-    max(a, max(b, c)) * max(a, max(b, c)) == a * a + b * b + c * c - max(a, max(b, c)) * max(a, max(b, c)) -> 1
+    2 * max(a, max(b, c)) * max(a, max(b, c)) > a * a + b * b + c * c -> 2
+    2 * max(a, max(b, c)) * max(a, max(b, c)) == a * a + b * b + c * c -> 1
     else -> 0
 }
 
