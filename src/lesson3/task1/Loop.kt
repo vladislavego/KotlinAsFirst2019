@@ -150,20 +150,20 @@ fun maxDivisor(n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var n = n
-    var m = m
-    if (n > m) {
-        n += m
-        m = n - m
-        n -= m
+    var firstNum = n
+    var secondNum = m
+    if (secondNum > firstNum) {
+        secondNum += firstNum
+        firstNum = secondNum - firstNum
+        secondNum -= firstNum
     }
     var r: Int
-    while (m % n != 0) {
-        r = m % n
-        m = n
-        n = r
+    while (firstNum % secondNum != 0) {
+        r = firstNum % secondNum
+        firstNum = secondNum
+        secondNum = r
     }
-    return n == 1
+    return secondNum == 1
 }
 
 /**
