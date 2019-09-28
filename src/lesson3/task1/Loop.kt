@@ -54,21 +54,21 @@ fun isPerfect(n: Int): Boolean {
  */
 
 
-fun gcd(m: Int, n: Int): Int {
-    var firstNum = n
-    var secondNum = m
-    if (secondNum > firstNum) {
-        secondNum += firstNum
-        firstNum = secondNum - firstNum
-        secondNum -= firstNum
+fun gcd(firstNum: Int, secondNum: Int): Int {
+    var m = firstNum
+    var n = secondNum
+    if (n > m) {
+        n += m
+        m = n - m
+        n -= m
     }
     var r: Int
-    while (firstNum % secondNum != 0) {
-        r = firstNum % secondNum
-        firstNum = secondNum
-        secondNum = r
+    while (m % n != 0) {
+        r = m % n
+        m = n
+        n = r
     }
-    return secondNum
+    return n
 
 }
 fun digitCountInNumber(n: Int, m: Int): Int =
