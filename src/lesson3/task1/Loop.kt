@@ -52,6 +52,25 @@ fun isPerfect(n: Int): Boolean {
  *
  * Найти число вхождений цифры m в число n
  */
+
+
+fun gcd(m: Int, n: Int): Int {
+    var firstNum = n
+    var secondNum = m
+    if (secondNum > firstNum) {
+        secondNum += firstNum
+        firstNum = secondNum - firstNum
+        secondNum -= firstNum
+    }
+    var r: Int
+    while (firstNum % secondNum != 0) {
+        r = firstNum % secondNum
+        firstNum = secondNum
+        secondNum = r
+    }
+    return secondNum
+
+}
 fun digitCountInNumber(n: Int, m: Int): Int =
     when {
         n == m -> 1
@@ -107,13 +126,8 @@ fun fib(n: Int): Int {
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int {
-    var k = max(m, n)
-    while (k % m != 0 || k % n != 0) {
-        ++k
-    }
-    return k
-}
+fun lcm(m: Int, n: Int): Int = m * n / gcd(m, n)
+
 
 /**
  * Простая
@@ -149,22 +163,8 @@ fun maxDivisor(n: Int): Int {
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean {
-    var firstNum = n
-    var secondNum = m
-    if (secondNum > firstNum) {
-        secondNum += firstNum
-        firstNum = secondNum - firstNum
-        secondNum -= firstNum
-    }
-    var r: Int
-    while (firstNum % secondNum != 0) {
-        r = firstNum % secondNum
-        firstNum = secondNum
-        secondNum = r
-    }
-    return secondNum == 1
-}
+fun isCoPrime(m: Int, n: Int): Boolean = gcd(m, n) == 1
+
 
 /**
  * Простая
