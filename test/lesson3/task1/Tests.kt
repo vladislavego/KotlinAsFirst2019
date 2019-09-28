@@ -81,10 +81,13 @@ class Tests {
         assertEquals(2, fib(3))
         assertEquals(5, fib(5))
         assertEquals(21, fib(8))
+        assertEquals(75025, fib(25))
+        assertEquals(832040, fib(30))
         assertEquals(102334155, fib(40))
         assertEquals(1134903170, fib(45))
         assertEquals(1836311903, fib(46))
         // Just to calculate it
+        // fib(50) = 12586269025. Функция выводит -298632863. Не помещается в Int?
         fib(50)
     }
 
