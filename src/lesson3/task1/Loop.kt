@@ -122,7 +122,7 @@ fun lcm(m: Int, n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     if (n % 2 == 0) return 2
-    for (i in 3..n / 3 step 2) {
+    for (i in 3..(sqrt(n.toDouble())).toInt() step 2) {
         if (n % i == 0) return i
     }
     return n
