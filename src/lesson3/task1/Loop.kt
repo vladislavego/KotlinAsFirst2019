@@ -53,6 +53,12 @@ fun isPerfect(n: Int): Boolean {
  * Найти число вхождений цифры m в число n
  */
 
+fun digitCountInNumber(n: Int, m: Int): Int =
+    when {
+        n == m -> 1
+        n < 10 -> 0
+        else -> digitCountInNumber(n / 10, m) + digitCountInNumber(n % 10, m)
+    }
 
 fun gcd(firstNum: Int, secondNum: Int): Int {
     var m = firstNum
@@ -69,14 +75,7 @@ fun gcd(firstNum: Int, secondNum: Int): Int {
         n = r
     }
     return n
-
 }
-fun digitCountInNumber(n: Int, m: Int): Int =
-    when {
-        n == m -> 1
-        n < 10 -> 0
-        else -> digitCountInNumber(n / 10, m) + digitCountInNumber(n % 10, m)
-    }
 
 /**
  * Простая
@@ -216,7 +215,18 @@ fun collatzSteps(x: Int): Int {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    var result = x
+    var n = 3
+    var k = 1
+    while (abs(result) >= eps) {
+        result += (result.pow(n) / factorial(n)) * (-1.0).pow(k)
+        n += 2
+        ++k
+    }
+    return result
+
+}
 
 /**
  * Средняя
