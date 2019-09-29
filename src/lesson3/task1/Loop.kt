@@ -61,13 +61,8 @@ fun digitCountInNumber(n: Int, m: Int): Int =
     }
 
 fun gcd(firstNum: Int, secondNum: Int): Int {
-    var m = firstNum
-    var n = secondNum
-    if (n > m) {
-        n += m
-        m = n - m
-        n -= m
-    }
+    var m = max(firstNum, secondNum)
+    var n = min(firstNum, secondNum)
     var r: Int
     while (m % n != 0) {
         r = m % n
@@ -102,18 +97,11 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    /* = when {
-    n <= 2 -> 1
-    else -> fib(n-1) + fib(n -2)
-} - 58s802ms  */
     var previousFibNumber = 1
     var fibNumber = 1
     for (i in 2 until n) {
-        // 1, 1, 2, 3, 5, 8, 13, 21...
-        // next = now + pre
         fibNumber += previousFibNumber
         previousFibNumber = fibNumber - previousFibNumber
-        // - 37ms
     }
     return fibNumber
 }
@@ -148,8 +136,7 @@ fun minDivisor(n: Int): Int {
  */
 fun maxDivisor(n: Int): Int {
     if (n % 2 == 0) return n / 2
-    for (i in n downTo 3 step 2) {
-        if (i == n) continue
+    for (i in n - 2 downTo 3 step 2) {
         if (n % i == 0) return i
     }
     return 1
@@ -222,7 +209,7 @@ fun sin(x: Double, eps: Double): Double {
     while (abs(result) >= eps) {
         result += (result.pow(n) / factorial(n)) * (-1.0).pow(k)
         n += 2
-        ++k
+        k = (k + 1) % 2
     }
     return result
 
