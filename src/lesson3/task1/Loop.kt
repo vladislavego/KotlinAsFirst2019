@@ -321,4 +321,21 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var count = 0
+    var number: Int
+    var digit = 0
+    for (i in 1..n) {
+        number = fib(i)
+        digit = firstDigitOfNumber(number)
+        count += 1
+        if (count == n) break
+        for (k in 1 until digitNumber(number)) {
+            number %= (10.0.pow((digitNumber(number) - 1).toDouble())).toInt()
+            digit = firstDigitOfNumber(number)
+            count += 1
+            if (count == n) return digit
+        }
+    }
+    return digit
+}
