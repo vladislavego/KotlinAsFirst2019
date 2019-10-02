@@ -249,4 +249,14 @@ class Tests {
         assertEquals(5, fibSequenceDigit(14))
         assertEquals(2, fibSequenceDigit(20))
     }
+
+    @Test
+    fun firstDigitOfNumber() {
+        assertEquals(5, firstDigitOfNumber(53))
+        assertEquals(2, firstDigitOfNumber(235))
+        assertEquals(0, firstDigitOfNumber(0))
+        assertEquals(7, firstDigitOfNumber(702186))
+        assertEquals(1, firstDigitOfNumber(100000000))
+    }
 }
+

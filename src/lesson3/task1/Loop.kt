@@ -71,6 +71,14 @@ fun gcd(firstNum: Int, secondNum: Int): Int {
     return n
 }
 
+fun firstDigitOfNumber(n: Int): Int {
+    var number = n
+    while(number >= 10) {
+        number /= 10
+    }
+    return number
+}
+
 /**
  * Простая
  *
@@ -206,7 +214,8 @@ fun sin(x: Double, eps: Double): Double {
     var n = 3
     var k = 1
     while (abs(result) >= eps) {
-        result += (result.pow(n) / factorial(n)) * (-1.0).pow(k)
+        if (k % 2 != 0) result -= (result.pow(n) / factorial(n))
+        else result += (result.pow(n) / factorial(n))
         n += 2
         k = (k + 1) % 2
     }
