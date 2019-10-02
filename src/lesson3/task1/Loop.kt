@@ -1,6 +1,7 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson3.task1
+
 import kotlin.math.*
 
 /**
@@ -73,7 +74,7 @@ fun gcd(firstNum: Int, secondNum: Int): Int {
 
 fun firstDigitOfNumber(n: Int): Int {
     var number = n
-    while(number >= 10) {
+    while (number >= 10) {
         number /= 10
     }
     return number
@@ -292,7 +293,24 @@ fun hasDifferentDigits(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var count = 0
+    var number: Int
+    var digit = 0
+    for (i in 1..n) {
+        number = i * i
+        digit = firstDigitOfNumber(number)
+        count += 1
+        if (count == n) break
+        for (k in 1 until digitNumber(number)) {
+            number %= (10.0.pow((digitNumber(number) - 1).toDouble())).toInt()
+            digit = firstDigitOfNumber(number)
+            count += 1
+            if (count == n) return digit
+        }
+    }
+    return digit
+}
 
 /**
  * Сложная
