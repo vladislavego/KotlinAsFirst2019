@@ -1,7 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson3.task1
-
 import kotlin.math.*
 
 /**
@@ -262,7 +261,18 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var number = n
+    var digit: Int
+    var nextDigit: Int
+    while (number >= 10) {
+        digit = number % 10
+        nextDigit = (number / 10) % 10
+        number /= 10
+        if (digit != nextDigit) return true
+    }
+    return false
+}
 
 /**
  * Сложная
