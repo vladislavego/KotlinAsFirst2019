@@ -4,6 +4,7 @@ package lesson2.task1
 
 import lesson1.task1.discriminant
 import kotlin.math.max
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
@@ -142,8 +143,8 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int = when {
     a + b <= c || a + c <= b || b + c <= a -> -1
-    2 * (max(a, max(b, c)) * max(a, max(b, c))) > a * a + b * b + c * c -> 2
-    2 * (max(a, max(b, c)) * max(a, max(b, c))) == a * a + b * b + c * c -> 1
+    2 * maxOf(a, b, c).pow(2) > a * a + b * b + c * c -> 2
+    2 * maxOf(a, b, c).pow(2) == a * a + b * b + c * c -> 1
     else -> 0
 }
 
