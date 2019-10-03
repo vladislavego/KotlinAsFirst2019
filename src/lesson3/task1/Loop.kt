@@ -144,12 +144,13 @@ fun minDivisor(n: Int): Int {
  */
 fun maxDivisor(n: Int): Int {
     if (n % 2 == 0) return n / 2
-    for (i in n - 2 downTo 3 step 2) {
+    var x = n / 3
+    if ((n / 3) % 2 == 0) x = n / 3 - 1
+    for (i in (x downTo 3 step 2)) {
         if (n % i == 0) return i
     }
     return 1
 }
-
 /**
  * Простая
  *
@@ -303,7 +304,7 @@ fun squareSequenceDigit(n: Int): Int {
         count += 1
         if (count == n) break
         for (k in 1 until digitNumber(number)) {
-            number %= (10.0.pow((digitNumber(number) - 1).toDouble())).toInt()
+            number %= 10.0.pow((digitNumber(number) - 1).toDouble()).toInt()
             digit = firstDigitOfNumber(number)
             count += 1
             if (count == n) return digit
