@@ -135,10 +135,11 @@ fun rookOrBishopThreatens(
 ): Int {
     val lineX = rookX == kingX
     val lineY = rookY == kingY
+    val bishopLine = (bishopX + bishopY - kingX - kingY) % 2 == 0
     return when {
-        ((lineX || lineY) && (bishopX + bishopY - kingX - kingY) % 2 == 0) -> 3
-        (lineX || lineY) -> 1
-        ((bishopX + bishopY - kingX - kingY) % 2 == 0) -> 2
+        ((lineX || lineY) && bishopLine) -> 3
+        lineX || lineY -> 1
+        bishopLine -> 2
         else -> 0
     }
 }
