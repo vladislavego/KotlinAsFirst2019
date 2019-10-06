@@ -111,9 +111,9 @@ fun whichRookThreatens(
     val lineY1 = rookY1 == kingY
     val lineY2 = rookY2 == kingY
     return when {
-        ((lineX1 || lineY1) && (lineX2 || lineY2)) -> 3
-        (lineX1 || lineY1) -> 1
-        (lineX2 || lineY2) -> 2
+        (lineX1 || lineY1) && (lineX2 || lineY2) -> 3
+        lineX1 || lineY1 -> 1
+        lineX2 || lineY2 -> 2
         else -> 0
     }
 }
@@ -137,7 +137,7 @@ fun rookOrBishopThreatens(
     val lineY = rookY == kingY
     val bishopLine = (bishopX + bishopY - kingX - kingY) % 2 == 0
     return when {
-        ((lineX || lineY) && bishopLine) -> 3
+        (lineX || lineY) && bishopLine -> 3
         lineX || lineY -> 1
         bishopLine -> 2
         else -> 0
