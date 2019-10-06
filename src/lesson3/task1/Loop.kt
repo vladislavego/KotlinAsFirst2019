@@ -151,6 +151,7 @@ fun maxDivisor(n: Int): Int {
     }
     return 1
 }
+
 /**
  * Простая
  *
@@ -295,19 +296,22 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int {
-    var count = 0
     var number: Int
-    var digit = 0
-    for (i in 1..n) {
-        number = i * i
-        digit = firstDigitOfNumber(number)
-        count += 1
+    var count = 1
+    var digit = 1
+    for (i in 2..n) {
         if (count == n) break
-        for (k in 1 until digitNumber(number)) {
-            number %= 10.0.pow((digitNumber(number) - 1).toDouble()).toInt()
-            digit = firstDigitOfNumber(number)
+        number = i * i
+        for (k in 1..digitNumber(number)) {
             count += 1
-            if (count == n) return digit
+            if (count == n) {
+                number = revert(number)
+                for (l in 1..k) {
+                    digit = number % 10
+                    number /= 10
+                }
+                break
+            }
         }
     }
     return digit
@@ -323,19 +327,22 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var count = 0
     var number: Int
-    var digit = 0
-    for (i in 1..n) {
-        number = fib(i)
-        digit = firstDigitOfNumber(number)
-        count += 1
+    var count = 1
+    var digit = 1
+    for (i in 2..n) {
         if (count == n) break
-        for (k in 1 until digitNumber(number)) {
-            number %= (10.0.pow((digitNumber(number) - 1).toDouble())).toInt()
-            digit = firstDigitOfNumber(number)
+        number = fib(i)
+        for (k in 1..digitNumber(number)) {
             count += 1
-            if (count == n) return digit
+            if (count == n) {
+                number = revert(number)
+                for (l in 1..k) {
+                    digit = number % 10
+                    number /= 10
+                }
+                break
+            }
         }
     }
     return digit
