@@ -105,11 +105,17 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = when {
-    (rookX1 == kingX || rookY1 == kingY && rookX2 == kingX || rookY2 == kingY) -> 3
-    (rookX1 == kingX || rookY1 == kingY) -> 1
-    (rookX2 == kingX || rookY2 == kingY) -> 2
-    else -> 0
+): Int {
+    val lineX1 = rookX1 == kingX
+    val lineX2 = rookX2 == kingX
+    val lineY1 = rookY1 == kingY
+    val lineY2 = rookY2 == kingY
+    return when {
+        ((lineX1 || lineY1) && (lineX2 || lineY2)) -> 3
+        (lineX1 || lineY1) -> 1
+        (lineX2 || lineY2) -> 2
+        else -> 0
+    }
 }
 
 /**
@@ -126,11 +132,15 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = when {
-    (rookX == kingX || rookY == kingY && (bishopX + bishopY - kingX - kingY) % 2 == 0) ->3
-    (rookX == kingX || rookY == kingY) -> 1
-    ((bishopX + bishopY - kingX - kingY) % 2 == 0) -> 2
-    else -> 0
+): Int {
+    val lineX = rookX == kingX
+    val lineY = rookY == kingY
+    return when {
+        ((lineX || lineY) && (bishopX + bishopY - kingX - kingY) % 2 == 0) -> 3
+        (lineX || lineY) -> 1
+        ((bishopX + bishopY - kingX - kingY) % 2 == 0) -> 2
+        else -> 0
+    }
 }
 
 /**
@@ -141,11 +151,14 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = when {
-    a + b <= c || a + c <= b || b + c <= a -> -1
-    2 * maxOf(a, b, c).pow(2) > a * a + b * b + c * c -> 2
-    2 * maxOf(a, b, c).pow(2) == a * a + b * b + c * c -> 1
-    else -> 0
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val maxSide = 2 * maxOf(a, b, c).pow(2)
+    return when {
+        a + b <= c || a + c <= b || b + c <= a -> -1
+        maxSide > a * a + b * b + c * c -> 2
+        maxSide == a * a + b * b + c * c -> 1
+        else -> 0
+    }
 }
 
 /**
