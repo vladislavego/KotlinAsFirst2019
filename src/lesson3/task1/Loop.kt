@@ -204,19 +204,7 @@ fun collatzSteps(x: Int): Int {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double {
-    var result = x
-    var n = 3
-    var k = 1
-    while (abs(result) >= eps) {
-        if (k % 2 != 0) result -= (result.pow(n) / factorial(n))
-        else result += (result.pow(n) / factorial(n))
-        n += 2
-        k = (k + 1) % 2
-    }
-    return result
-
-}
+fun sin(x: Double, eps: Double): Double = TODO()
 
 /**
  * Средняя
@@ -287,26 +275,28 @@ fun hasDifferentDigits(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
 fun squareSequenceDigit(n: Int): Int {
-    var number: Int
-    var count = 1
-    var digit = 1
-    for (i in 2..n) {
-        if (count == n) break
-        number = i * i
-        for (k in 1..digitNumber(number)) {
+    if (n <= 3) return n * n
+    var number = 3
+    var sqrNumber = 1
+    var count = 3
+    var digitPosition = 1
+    var digitsInNumber = 1
+    while (count != n) {
+        number += 1
+        sqrNumber = number * number
+        digitsInNumber = digitNumber(sqrNumber)
+        for (k in 1..digitsInNumber) {
             count += 1
             if (count == n) {
-                number = revert(number)
-                for (l in 1..k) {
-                    digit = number % 10
-                    number /= 10
-                }
+                digitPosition = k
                 break
             }
         }
     }
-    return digit
+    val position = (digitsInNumber - digitPosition).toDouble()
+    return if (position != 0.0) (sqrNumber / 10.0.pow(position)).toInt() % 10 else sqrNumber % 10
 }
 
 /**
@@ -319,23 +309,24 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var number: Int
-    var count = 1
-    var digit = 1
-    for (i in 2..n) {
-        if (count == n) break
-        number = fib(i)
-        for (k in 1..digitNumber(number)) {
+    if (n <= 6) return fib(n)
+    var number = 6
+    var count = 6
+    var digitPosition = 1
+    var fibNumber = 1
+    var digitsInNumber = 1
+    while (count != n) {
+        number += 1
+        fibNumber = fib(number)
+        digitsInNumber = digitNumber(fibNumber)
+        for (k in 1..digitsInNumber) {
             count += 1
             if (count == n) {
-                number = revert(number)
-                for (l in 1..k) {
-                    digit = number % 10
-                    number /= 10
-                }
+                digitPosition = k
                 break
             }
         }
     }
-    return digit
+    val position = (digitsInNumber - digitPosition).toDouble()
+    return if (position != 0.0) (fibNumber / 10.0.pow(position)).toInt() % 10 else fibNumber % 10
 }

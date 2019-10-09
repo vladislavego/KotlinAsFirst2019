@@ -77,7 +77,7 @@ fun invertPositives(list: MutableList<Int>) {
 fun squares(list: List<Int>) = list.map { it * it }
 
 
-fun squaresOfDouble(list: List<Double>) = list.map { it * it }
+//fun squaresOfDouble(list: List<Double>) = list.map { it * it }
 
 
 /**
@@ -119,14 +119,14 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>) = sqrt(squaresOfDouble(v).sum())
+fun abs(v: List<Double>): List<Double> = TODO()
 
 /**
  * Простая
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = if (list.isEmpty()) 0.0 else list.sum() / list.size
+fun mean(list: List<Double>): Double = TODO()
 
 /**
  * Средняя
@@ -136,15 +136,7 @@ fun mean(list: List<Double>): Double = if (list.isEmpty()) 0.0 else list.sum() /
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> {
-    val meanOfList = mean(list)
-    if (list.isNotEmpty()) {
-        for (i in 0 until list.size) {
-            list[i] -= meanOfList
-        }
-    }
-    return list
-}
+fun center(list: MutableList<Double>): MutableList<Double> = TODO()
 
 /**
  * Средняя
@@ -153,15 +145,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int {
-    var production = 0
-    if (a.isNotEmpty()) {
-        for (i in a.indices) {
-            production += a[i] * b[i]
-        }
-    }
-    return production
-}
+fun times(a: List<Int>, b: List<Int>): Int = TODO()
 
 /**
  * Средняя
@@ -171,18 +155,7 @@ fun times(a: List<Int>, b: List<Int>): Int {
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int {
-    var result = 0
-    var k = 1
-    if (p.isNotEmpty()) {
-        result = p[0]
-        for (i in 1 until p.size) {
-            result += p[i] * (x.toDouble().pow(k)).toInt()
-            ++k
-        }
-    }
-    return result
-}
+fun polynom(p: List<Int>, x: Int): Int = TODO()
 
 /**
  * Средняя
@@ -194,16 +167,7 @@ fun polynom(p: List<Int>, x: Int): Int {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> {
-    if (list.isNotEmpty()) {
-        var sumOfElements = list[0]
-        for (i in 1 until list.size) {
-            sumOfElements += list[i]
-            list[i] = sumOfElements
-        }
-    }
-    return list
-}
+fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
 
 /**
  * Средняя
@@ -212,18 +176,7 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> {
-    val primeFactors = mutableListOf<Int>()
-    var number = n
-    var k = 2
-    while (number != 1) {
-        if (number % k == 0) {
-            primeFactors += k
-            number /= k
-        } else ++k
-    }
-    return primeFactors
-}
+fun factorize(n: Int): List<Int> = TODO()
 
 /**
  * Сложная
@@ -232,18 +185,7 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String {
-    val primeFactors = mutableListOf<Int>()
-    var number = n
-    var k = 2
-    while (number != 1) {
-        if (number % k == 0) {
-            primeFactors += k
-            number /= k
-        } else ++k
-    }
-    return primeFactors.joinToString(separator = "*")
-}
+fun factorizeToString(n: Int): String = TODO()
 
 /**
  * Средняя
