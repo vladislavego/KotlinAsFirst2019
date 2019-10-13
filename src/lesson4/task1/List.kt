@@ -112,6 +112,23 @@ fun isPalindrome(str: String): Boolean {
  */
 fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", postfix = " = ${list.sum()}")
 
+
+/**
+ * функция инвертирующая полученный список
+ */
+fun revertList(lst: List<Int>): List<Int> {
+    val list = lst.toMutableList()
+    for (i in 0 until list.size / 2) {
+        val lowerDigit = list[i]
+        val higherDigit = list[list.size - i - 1]
+        list[i] = higherDigit
+        list[list.size - i - 1] = lowerDigit
+    }
+    return list
+}
+
+fun revertList(vararg digits: Int) = revertList(digits.toList())
+
 /**
  * Простая
  *
@@ -119,6 +136,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
+
 fun abs(v: List<Double>) = sqrt(squaresOfDouble(v).sum())
 
 /**
@@ -236,22 +254,9 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String {
-    val primeFactors = mutableListOf<Int>()
-    var number = n
-    var k = 3
-    while (number != 1) {
-        if (number % 2 == 0) {
-            primeFactors += 2
-            number /= 2
-        }
-        if (number % k == 0) {
-            primeFactors += k
-            number /= k
-        } else k += 2
-    }
-    return primeFactors.joinToString(separator = "*")
-}
+
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
+
 
 /**
  * Средняя
@@ -267,13 +272,7 @@ fun convert(n: Int, base: Int): List<Int> {
         numberInBase.add(number % base)
         number /= base
     }
-    for (i in 0 until numberInBase.size / 2) {
-        val lowerDigit = numberInBase[i]
-        val higherDigit = numberInBase[numberInBase.size - i - 1]
-        numberInBase[i] = higherDigit
-        numberInBase[numberInBase.size - i - 1] = lowerDigit
-    }
-    return numberInBase
+    return revertList(numberInBase)
 }
 
 /**
@@ -287,6 +286,8 @@ fun convert(n: Int, base: Int): List<Int> {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
+
+
 fun convertToString(n: Int, base: Int): String {
     val numberInBase = convert(n, base)
     val numberToListOfString = mutableListOf<String>()
@@ -330,14 +331,14 @@ fun decimal(digits: List<Int>, base: Int): Int {
  */
 
 fun decimalFromString(str: String, base: Int): Int {
-    val strToInt = mutableListOf<Int>()
+    val strToListOfInt = mutableListOf<Int>()
     for (element in str) {
         val charToInt = if (element in 'a'..'z') {
             10 + element.toInt() - 'a'.toInt()
         } else element.toString().toInt()
-        strToInt.add(charToInt)
+        strToListOfInt.add(charToInt)
     }
-    return decimal(strToInt, base)
+    return decimal(strToListOfInt, base)
 }
 
 /**

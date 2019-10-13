@@ -239,4 +239,19 @@ class Tests {
         assertEquals("девятьсот тысяч", russian(900000))
         assertEquals("двенадцать", russian(12))
     }
+
+    @Test
+    fun revertList() {
+        assertEquals(listOf(1, 2, 3, 4, 5), revertList(listOf(5, 4, 3, 2, 1)))
+        assertEquals(listOf(7, 15, 8), revertList(listOf(8, 15, 7)))
+        assertEquals(listOf(5, 5, 5, 5, 5), revertList(listOf(5, 5, 5, 5, 5)))
+        assertEquals(listOf(0), revertList(listOf(0)))
+        assertEquals(listOf(53, 17), revertList(listOf(17, 53)))
+        assertEquals(listOf(53, 17), revertList(17, 53))
+        assertEquals(listOf(1, 2, 3, 4, 5), revertList(5, 4, 3, 2, 1))
+        assertEquals(listOf(7, 15, 8), revertList(8, 15, 7))
+        assertEquals(listOf(5, 5, 5, 5, 5), revertList(5, 5, 5, 5, 5))
+        assertEquals(listOf(0), revertList(0))
+
+    }
 }
