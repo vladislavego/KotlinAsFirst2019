@@ -281,22 +281,16 @@ fun squareSequenceDigit(n: Int): Int {
     var number = 3
     var sqrNumber = 1
     var count = 3
-    var digitPosition = 1
     var digitsInNumber = 1
-    while (count != n) {
+    while (count < n) {
         number += 1
         sqrNumber = number * number
         digitsInNumber = digitNumber(sqrNumber)
-        for (k in 1..digitsInNumber) {
-            count += 1
-            if (count == n) {
-                digitPosition = k
-                break
-            }
-        }
+        count += digitsInNumber
     }
+    val digitPosition = digitsInNumber - count + n
     val position = (digitsInNumber - digitPosition).toDouble()
-    return if (position != 0.0) (sqrNumber / 10.0.pow(position)).toInt() % 10 else sqrNumber % 10
+    return (sqrNumber / 10.0.pow(position)).toInt() % 10
 }
 
 /**
@@ -312,21 +306,15 @@ fun fibSequenceDigit(n: Int): Int {
     if (n <= 6) return fib(n)
     var number = 6
     var count = 6
-    var digitPosition = 1
     var fibNumber = 1
     var digitsInNumber = 1
-    while (count != n) {
+    while (count < n) {
         number += 1
         fibNumber = fib(number)
         digitsInNumber = digitNumber(fibNumber)
-        for (k in 1..digitsInNumber) {
-            count += 1
-            if (count == n) {
-                digitPosition = k
-                break
-            }
-        }
+        count += digitsInNumber
     }
+    val digitPosition = digitsInNumber - count + n
     val position = (digitsInNumber - digitPosition).toDouble()
-    return if (position != 0.0) (fibNumber / 10.0.pow(position)).toInt() % 10 else fibNumber % 10
+    return (fibNumber / 10.0.pow(position)).toInt() % 10
 }
