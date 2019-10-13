@@ -288,19 +288,17 @@ fun convert(n: Int, base: Int): List<Int> {
  * (например, n.toString(base) и подобные), запрещается.
  */
 fun convertToString(n: Int, base: Int): String {
-    val numberInBase = convert(n, base).toMutableList()
-    val toString = mutableListOf<String>()
-    for (i in 0 until numberInBase.size) {
-        val digit = numberInBase[i]
-        var digitToString = digit.toString()
-        if (digit >= 10) {
-            digitToString = ('a'.toByte().toInt() - 10 + digit).toChar().toString()
-
-        }
-        toString.add(digitToString)
+    val numberInBase = convert(n, base)
+    val numberToListOfString = mutableListOf<String>()
+    for (element in numberInBase) {
+        val digitToString = if (element >= 10) ('a'.toInt() - 10 + element).toChar().toString()
+        else element.toString()
+        numberToListOfString.add(digitToString)
     }
-    return toString.joinToString(separator = "")
+    return numberToListOfString.joinToString(separator = "")
 }
+
+
 
 /**
  * Средняя
@@ -333,13 +331,10 @@ fun decimal(digits: List<Int>, base: Int): Int {
 
 fun decimalFromString(str: String, base: Int): Int {
     val strToInt = mutableListOf<Int>()
-    val strToList = str.toMutableList()
-    for (i in 0 until strToList.size) {
-        val char = strToList[i]
-        var charToInt: Int
-        charToInt = if (char in 'a'..'z') {
-            10 + char.toInt() - 'a'.toInt()
-        } else char.toString().toInt()
+    for (element in str) {
+        val charToInt = if (element in 'a'..'z') {
+            10 + element.toInt() - 'a'.toInt()
+        } else element.toString().toInt()
         strToInt.add(charToInt)
     }
     return decimal(strToInt, base)
