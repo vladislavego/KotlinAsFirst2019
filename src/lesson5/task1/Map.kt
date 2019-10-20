@@ -237,8 +237,8 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
 
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     val codeOfChars = mutableListOf<Int>()
-    for (i in 0 until chars.size) {
-        val code = chars[i].toInt()
+    for (element in chars) {
+        val code = element.toInt()
         codeOfChars.add(code)
     }
     val setOfCodes = codeOfChars.toSet()
@@ -318,7 +318,20 @@ fun hasAnagrams(words: List<String>): Boolean {
  *          "Mikhail" to setOf("Sveta", "Marat")
  *        )
  */
-fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
+
+fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
+    val mutFriends = friends.toMutableMap()
+    for ((key, value) in mutFriends) {
+        if (value.isEmpty()) mutFriends[key] = setOf("")
+        val setOfNames = value.toMutableSet()
+        for (element in value) {
+            val names = friends[element]
+            if (names != null) setOfNames += (names - key) else mutFriends[element] = setOf()
+        }
+        mutFriends[key] = setOfNames
+    }
+    return mutFriends
+}
 
 /**
  * Сложная
