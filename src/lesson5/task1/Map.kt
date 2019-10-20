@@ -239,7 +239,18 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var name: String? = null
+    var minPrice = 0.0
+    for ((key, value) in stuff) {
+        if (kind == value.first && (value.second < minPrice || minPrice == 0.0)) {
+            minPrice = value.second
+            name = key
+        }
+    }
+    return name
+}
 
 /**
  * Средняя
@@ -250,7 +261,14 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
+
+fun canBuildFrom(chars: List<Char>, word: String): Boolean {
+    val charSet = chars.toSet()
+    for (char in word) {
+        if (char !in charSet) return false
+    }
+    return true
+}
 
 /**
  * Средняя
@@ -264,7 +282,20 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val listOfPairs = mutableListOf<Pair<String, Int>>()
+    for (i in 0 until list.size - 1) {
+        var count = 1
+        for (k in i + 1 until list.size) {
+            if (list[i] == list[k]) {
+                ++count
+            }
+            if (count != 1) listOfPairs.add(list[i] to count)
+        }
+    }
+    return listOfPairs.toMap()
+}
 
 /**
  * Средняя
@@ -275,7 +306,15 @@ fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+
+fun hasAnagrams(words: List<String>): Boolean {
+    for (i in 0 until words.size - 1) {
+        for (k in i + 1 until words.size) {
+            if (words[i].toSet() == words[k].toSet()) return true
+        }
+    }
+    return false
+}
 
 /**
  * Сложная
