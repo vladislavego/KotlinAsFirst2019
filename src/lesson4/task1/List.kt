@@ -234,6 +234,7 @@ fun factorize(n: Int): List<Int> {
     val primeFactors = mutableListOf<Int>()
     var number = n
     var k = 3
+    if (number == 1) primeFactors += 0
     while (number != 1) {
         if (number % 2 == 0) {
             primeFactors += 2
@@ -244,7 +245,7 @@ fun factorize(n: Int): List<Int> {
             number /= k
         } else k += 2
     }
-    return primeFactors
+    return primeFactors.sorted()
 }
 
 /**
@@ -298,8 +299,6 @@ fun convertToString(n: Int, base: Int): String {
     }
     return numberToListOfString.joinToString(separator = "")
 }
-
-
 
 /**
  * Средняя
