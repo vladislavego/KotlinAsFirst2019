@@ -241,6 +241,10 @@ class Tests {
     @Tag("Normal")
     fun extractRepeats() {
         assertEquals(
+            mapOf("" to 3),
+            extractRepeats(listOf("", "", ""))
+        )
+        assertEquals(
             emptyMap<String, Int>(),
             extractRepeats(emptyList())
         )
