@@ -91,35 +91,8 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
-    val listOfStudents = mutableMapOf<Int, List<String>>()
-    val gradeFive = mutableListOf<String>()
-    val gradeFour = mutableListOf<String>()
-    val gradeThree = mutableListOf<String>()
-    val gradeTwo = mutableListOf<String>()
-    for ((name, grade) in grades) {
-        when (grade) {
-            5 -> {
-                gradeFive.add(name)
-                listOfStudents += Pair(grade, gradeFive)
-            }
 
-            4 -> {
-                gradeFour.add(name)
-                listOfStudents += Pair(grade, gradeFour)
-            }
-            3 -> {
-                gradeThree.add(name)
-                listOfStudents += Pair(grade, gradeThree)
-            }
-            else -> {
-                gradeTwo.add(name)
-                listOfStudents += Pair(grade, gradeTwo)
-            }
-        }
-    }
-    return listOfStudents
-}
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
 
 /**
  * Простая
@@ -291,8 +264,8 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
             if (list[i] == list[k]) {
                 ++count
             }
-            if (count != 1) listOfPairs.add(list[i] to count)
         }
+        if (count != 1) listOfPairs.add(list[i] to count)
     }
     return listOfPairs.toMap()
 }
