@@ -333,6 +333,7 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
     return mutFriends
 }
 
+
 /**
  * Сложная
  *
