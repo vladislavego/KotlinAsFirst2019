@@ -130,16 +130,7 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int {
-    val rookLine = rookX == kingX || rookY == kingY
-    val bishopLine = (bishopX + bishopY - kingX - kingY) % 2 == 0
-    return when {
-        rookLine && bishopLine -> 3
-        rookLine -> 1
-        bishopLine -> 2
-        else -> 0
-    }
-}
+): Int = TODO()
 
 /**
  * Простая
