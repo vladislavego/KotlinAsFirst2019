@@ -77,7 +77,7 @@ fun dateStrToDigit(str: String): String {
     try {
         val day = words[0].toInt()
         val month = when (words[1]) {
-            "янаваря" -> 1
+            "января" -> 1
             "февраля" -> 2
             "марта" -> 3
             "апреля" -> 4
@@ -92,7 +92,7 @@ fun dateStrToDigit(str: String): String {
             else -> return String()
         }
         val year = words[2].toInt()
-        if (day > daysInMonth(month, year) || day < 1 || month < 1) return String()
+        if (day > daysInMonth(month, year) || day < 1) return String()
         return String.format("%02d.%02d.%d", day, month, year)
     } catch (e: NumberFormatException) {
         return String()
@@ -112,7 +112,35 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val digitWords = digital.split(".")
+    if (digitWords.size > 3) return String()
+    try {
+        val day = digitWords[0].toInt()
+        val month = when (digitWords[1].toInt()) {
+            1 -> "января"
+            2 -> "февраля"
+            3 -> "марта"
+            4 -> "апреля"
+            5 -> "мая"
+            6 -> "июня"
+            7 -> "июля"
+            8 -> "августа"
+            9 -> "сентября"
+            10 -> "октября"
+            11 -> "ноября"
+            12 -> "декабря"
+            else -> return String()
+        }
+        val year = digitWords[2].toInt()
+        if (day > daysInMonth(digitWords[1].toInt(), year) || day < 1) return String()
+        return String.format("%d %s %d", day, month, year)
+    } catch (e: NumberFormatException) {
+        return String()
+    } catch (e: IndexOutOfBoundsException) {
+        return String()
+    }
+}
 
 /**
  * Средняя
