@@ -154,12 +154,11 @@ fun mean(list: List<Double>): Double = if (list.isEmpty()) 0.0 else list.sum() /
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
+
 fun center(list: MutableList<Double>): MutableList<Double> {
     val meanOfList = mean(list)
-    if (list.isNotEmpty()) {
-        for (i in 0 until list.size) {
-            list[i] -= meanOfList
-        }
+    for (i in 0 until list.size) {
+        list[i] -= meanOfList
     }
     return list
 }
@@ -171,12 +170,11 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
+
 fun times(a: List<Int>, b: List<Int>): Int {
     var production = 0
-    if (a.isNotEmpty()) {
-        for (i in a.indices) {
-            production += a[i] * b[i]
-        }
+    for (i in a.indices) {
+        production += a[i] * b[i]
     }
     return production
 }
@@ -191,13 +189,10 @@ fun times(a: List<Int>, b: List<Int>): Int {
  */
 fun polynom(p: List<Int>, x: Int): Int {
     var result = 0
-    var k = 1
-    if (p.isNotEmpty()) {
-        result = p[0]
-        for (i in 1 until p.size) {
-            result += p[i] * (x.toDouble().pow(k)).toInt()
-            ++k
-        }
+    var pow = 1
+    for (i in p.indices) {
+        result += p[i] * pow
+        pow *= x
     }
     return result
 }
@@ -213,12 +208,10 @@ fun polynom(p: List<Int>, x: Int): Int {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
-    if (list.isNotEmpty()) {
-        var sumOfElements = list[0]
-        for (i in 1 until list.size) {
-            sumOfElements += list[i]
-            list[i] = sumOfElements
-        }
+    for (i in 0 until list.size) {
+        var sumOfElements = 0
+        sumOfElements += list[i]
+        list[i] = sumOfElements
     }
     return list
 }
@@ -243,7 +236,9 @@ fun factorize(n: Int): List<Int> {
         if (number % k == 0) {
             primeFactors += k
             number /= k
-        } else k += 2
+        } else {
+            k += 2
+        }
     }
     return primeFactors.sorted()
 }
@@ -270,11 +265,11 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
 fun convert(n: Int, base: Int): List<Int> {
     var number = n
     val numberInBase = mutableListOf<Int>()
-    if (number == 0) numberInBase.add(0)
-    while (number > 0) {
+
+    do {
         numberInBase.add(number % base)
         number /= base
-    }
+    } while (number > 0)
     return revertList(numberInBase)
 }
 
@@ -310,13 +305,7 @@ fun convertToString(n: Int, base: Int): String {
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
 
-fun decimal(digits: List<Int>, base: Int): Int {
-    var decimalDigit = 0
-    for (element in digits) {
-        decimalDigit = decimalDigit * base + element
-    }
-    return decimalDigit
-}
+fun decimal(digits: List<Int>, base: Int): Int = polynom(revertList(digits), base)
 
 /**
  * Сложная
@@ -336,7 +325,9 @@ fun decimalFromString(str: String, base: Int): Int {
     for (element in str) {
         val charToInt = if (element in 'a'..'z') {
             10 + element.toInt() - 'a'.toInt()
-        } else element.toString().toInt()
+        } else {
+            element.toString().toInt()
+        }
         strToListOfInt.add(charToInt)
     }
     return decimal(strToListOfInt, base)
