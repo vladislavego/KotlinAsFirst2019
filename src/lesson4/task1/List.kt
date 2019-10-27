@@ -265,7 +265,6 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
 fun convert(n: Int, base: Int): List<Int> {
     var number = n
     val numberInBase = mutableListOf<Int>()
-
     do {
         numberInBase.add(number % base)
         number /= base
@@ -288,13 +287,12 @@ fun convert(n: Int, base: Int): List<Int> {
 
 fun convertToString(n: Int, base: Int): String {
     val numberInBase = convert(n, base)
-    val numberToListOfString = mutableListOf<String>()
+    var digitToString = ""
     for (element in numberInBase) {
-        val digitToString = if (element >= 10) ('a'.toInt() - 10 + element).toChar().toString()
+        digitToString += if (element >= 10) ('a'.toInt() - 10 + element).toChar().toString()
         else element.toString()
-        numberToListOfString.add(digitToString)
     }
-    return numberToListOfString.joinToString(separator = "")
+    return digitToString
 }
 
 /**
