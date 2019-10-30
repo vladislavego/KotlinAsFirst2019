@@ -160,14 +160,16 @@ fun dateDigitToStr(digital: String): String {
 
 fun flattenPhoneNumber(phone: String): String =
     try {
-        if (phone[0] == '+') {
+        if (phone[0] == '+')
             "+" + phone.filter { it != ' ' && it != '-' && it != '+' }.split("(", ")")
                 .map { it.toInt() }.joinToString(separator = "")
-        } else {
+        else
             phone.filter { it != ' ' && it != '-' && it != '+' }.split("(", ")")
                 .map { it.toInt() }.joinToString(separator = "")
-        }
+
     } catch (e: NumberFormatException) {
+        ""
+    } catch (e: StringIndexOutOfBoundsException) {
         ""
     }
 
