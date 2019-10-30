@@ -4,6 +4,7 @@ package lesson6.task1
 
 import lesson2.task2.daysInMonth
 import java.lang.NumberFormatException
+import kotlin.math.max
 
 /**
  * Пример
@@ -169,7 +170,14 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+
+fun bestLongJump(jumps: String): Int =
+    try {
+        jumps.split(" ").filter { it != "%" && it != "-" }
+            .fold(-1) { longestJump, currentJump -> max(longestJump, currentJump.toInt()) }
+    } catch (e: NumberFormatException) {
+        -1
+    }
 
 /**
  * Сложная
