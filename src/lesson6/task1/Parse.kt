@@ -203,7 +203,13 @@ fun bestLongJump(jumps: String): Int =
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int =
+    try {
+        jumps.split("+").filter {it != ""}.map {it.filter {it != ' '}}
+            .fold(-1) { longestJump, currentJump -> max(longestJump, currentJump.toInt()) }
+    } catch (e: NumberFormatException) {
+        -1
+    }
 
 /**
  * Сложная
