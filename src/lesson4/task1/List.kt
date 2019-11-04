@@ -208,8 +208,8 @@ fun polynom(p: List<Int>, x: Int): Int {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var sumOfElements = 0
     for (i in 0 until list.size) {
-        var sumOfElements = 0
         sumOfElements += list[i]
         list[i] = sumOfElements
     }
