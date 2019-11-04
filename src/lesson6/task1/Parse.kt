@@ -208,8 +208,8 @@ fun bestHighJump(jumps: String): Int {
     var bestJump = -1
     val results = jumps.split(" ")
     return try {
-        for (i in 0 until results.size) {
-            if ('+' in results[i + 1]) bestJump = results[i].toInt()
+        for (i in results.indices) {
+            if ('+' in results[i]) bestJump = results[i - 1].toInt()
         }
         bestJump
     } catch (e: IndexOutOfBoundsException) {
