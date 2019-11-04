@@ -227,12 +227,11 @@ fun factorize(n: Int): List<Int> {
     val primeFactors = mutableListOf<Int>()
     var number = n
     var k = 3
-    if (number == 1) primeFactors += 0
+    while (number % 2 == 0) {
+        primeFactors += 2
+        number /= 2
+    }
     while (number != 1) {
-        if (number % 2 == 0) {
-            primeFactors += 2
-            number /= 2
-        }
         if (number % k == 0) {
             primeFactors += k
             number /= k
