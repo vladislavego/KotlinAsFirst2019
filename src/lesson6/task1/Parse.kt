@@ -203,13 +203,19 @@ fun bestLongJump(jumps: String): Int =
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int =
-    try {
-        jumps.split("+").filter {it != ""}.map {it.filter {it != ' '}}
-            .fold(-1) { longestJump, currentJump -> max(longestJump, currentJump.toInt()) }
-    } catch (e: NumberFormatException) {
-        -1
+
+fun bestHighJump(jumps: String): Int {
+    var bestJump = -1
+    val results = jumps.split(" ")
+    return try {
+        for (i in 0 until results.size) {
+            if ('+' in results[i + 1]) bestJump = results[i].toInt()
+        }
+        bestJump
+    } catch (e: IndexOutOfBoundsException) {
+        bestJump
     }
+}
 
 /**
  * Сложная
@@ -220,6 +226,7 @@ fun bestHighJump(jumps: String): Int =
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
+
 fun plusMinus(expression: String): Int = TODO()
 
 /**
