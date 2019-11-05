@@ -227,7 +227,27 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    val expressionParts = expression.split(" ")
+    return try {
+        for (i in expressionParts.indices step 2) {
+            expressionParts[i].map { it.toString().toInt() }
+        }
+        var result = expressionParts[0].toInt()
+        for (i in 1 until expressionParts.size step 2) {
+            when (expressionParts[i]) {
+                "+" -> result += expressionParts[i + 1].toInt()
+                "-" -> result -= expressionParts[i + 1].toInt()
+                else -> throw IllegalArgumentException("неверный формат выражения")
+            }
+        }
+        result
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException("неверный формат выражения")
+    } catch (e: IndexOutOfBoundsException) {
+        throw IllegalArgumentException("неверный формат выражения")
+    }
+}
 
 /**
  * Сложная
@@ -238,7 +258,21 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+
+fun firstDuplicateIndex(str: String): Int {
+    val splitStr = str.split(" ").map { it.toLowerCase() }
+    var indexOfWord = -1
+    return try {
+        var sumOfIndexes = 0
+        for (i in 1 until splitStr.size) {
+            if (splitStr[i] == splitStr[i - 1]) indexOfWord = i + sumOfIndexes - 1
+            sumOfIndexes += splitStr[i - 1].count()
+        }
+        indexOfWord
+    } catch (e: IndexOutOfBoundsException) {
+        indexOfWord
+    }
+}
 
 /**
  * Сложная
