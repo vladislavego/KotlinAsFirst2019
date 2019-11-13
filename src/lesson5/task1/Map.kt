@@ -264,7 +264,7 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
 
 fun hasAnagrams(words: List<String>): Boolean {
     var anagrams = false
-    words.map { str -> anagrams = words.count { it.toSet() == str.toSet() } > 1 }
+    words.map { str -> if (words.count { it.toSet() == str.toSet() } > 1) anagrams = true }
     return anagrams
 }
 
@@ -315,14 +315,17 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    var indexes = -1 to -1
-    list.map {
-        if ((number - it) in list && list.indexOf(it) != list.indexOf(number - it))
-            indexes =
-                min(list.indexOf(it), list.indexOf(number - it)) to max(list.indexOf(it), list.indexOf(number - it))
+    var indexPair = Pair(-1, -1)
+    for (i in 0 until list.size - 1) {
+        for (k in i + 1 until list.size) {
+            if (list[i] + list[k] == number) {
+                indexPair = Pair(i, k)
+            }
+        }
     }
-    return indexes
+    return indexPair
 }
+
 
 /**
  * Очень сложная

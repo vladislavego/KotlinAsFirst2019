@@ -263,8 +263,12 @@ fun firstDuplicateIndex(str: String): Int {
     return try {
         var sumOfIndexes = 0
         for (i in 1 until splitStr.size) {
-            if (splitStr[i] == splitStr[i - 1]) indexOfWord = i + sumOfIndexes - 1
-            sumOfIndexes += splitStr[i - 1].count()
+            if (splitStr[i] == splitStr[i - 1]) {
+                indexOfWord = i + sumOfIndexes - 1
+                break
+            } else {
+                sumOfIndexes += splitStr[i - 1].count()
+            }
         }
         indexOfWord
     } catch (e: IndexOutOfBoundsException) {

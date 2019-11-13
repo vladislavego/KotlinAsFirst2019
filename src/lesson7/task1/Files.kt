@@ -60,11 +60,10 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     val listOfChars = mutableListOf<String>()
     var equal = false
     for (str in substrings) {
-        for (i in str.indices) {
-            val char = str[i]
+        for (char in str) {
             if (char.toInt() in 33..47) listOfChars.add("\\$char") else listOfChars.add("$char")
-            if (i == 0) continue
-            equal = char == str[i - 1]
+            if (str.length == 1) continue
+            equal = char == str[1]
         }
         var count = 0
         val newStr = listOfChars.joinToString(separator = "").toLowerCase()
