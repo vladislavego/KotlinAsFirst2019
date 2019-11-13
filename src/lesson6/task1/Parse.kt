@@ -90,15 +90,15 @@ fun dateStrToDigit(str: String): String {
             "октября" -> 10
             "ноября" -> 11
             "декабря" -> 12
-            else -> return String()
+            else -> return ""
         }
         val year = words[2].toInt()
-        if (day > daysInMonth(month, year) || day < 1) return String()
+        if (day !in 1..daysInMonth(month, year)) return ""
         return String.format("%02d.%02d.%d", day, month, year)
     } catch (e: NumberFormatException) {
-        return String()
+        return ""
     } catch (e: IndexOutOfBoundsException) {
-        return String()
+        return ""
     }
 }
 
@@ -131,15 +131,15 @@ fun dateDigitToStr(digital: String): String {
             10 -> "октября"
             11 -> "ноября"
             12 -> "декабря"
-            else -> return String()
+            else -> return ""
         }
         val year = digitWords[2].toInt()
-        if (day > daysInMonth(digitWords[1].toInt(), year) || day < 1) return String()
+        if (day !in 1..daysInMonth(digitWords[1].toInt(), year)) return ""
         return String.format("%d %s %d", day, month, year)
     } catch (e: NumberFormatException) {
-        return String()
+        return ""
     } catch (e: IndexOutOfBoundsException) {
-        return String()
+        return ""
     }
 }
 
@@ -160,16 +160,14 @@ fun dateDigitToStr(digital: String): String {
 
 fun flattenPhoneNumber(phone: String): String =
     try {
-        if (phone[0] == '+')
-            "+" + phone.filter { it != ' ' && it != '-' && it != '+' }.split("(", ")")
-                .map { it.toInt() }.joinToString(separator = "")
-        else
-            phone.filter { it != ' ' && it != '-' && it != '+' }.split("(", ")")
-                .map { it.toInt() }.joinToString(separator = "")
+        Regex("""^\+?((\d*(\(\d+\))\d*)|(\d+))$""").find(
+            phone.filter { it != ' ' && it != '-' })!!.value.filter { it != '(' && it != ')' }
 
     } catch (e: NumberFormatException) {
         ""
     } catch (e: StringIndexOutOfBoundsException) {
+        ""
+    } catch (e: NullPointerException) {
         ""
     }
 
