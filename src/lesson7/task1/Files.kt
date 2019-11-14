@@ -62,8 +62,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     for (str in substrings) {
         for (char in str) {
             if (char.toInt() in 33..47) listOfChars.add("\\$char") else listOfChars.add("$char")
-            if (str.length == 1) continue
-            equal = char == str[1]
+            if (str.length < 2) continue
+            equal = char == str[0]
         }
         var count = 0
         val newStr = listOfChars.joinToString(separator = "").toLowerCase()
