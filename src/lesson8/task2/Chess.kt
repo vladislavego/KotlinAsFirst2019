@@ -86,7 +86,12 @@ fun rookMoveNumber(start: Square, end: Square): Int {
  *          rookTrajectory(Square(3, 5), Square(8, 5)) = listOf(Square(3, 5), Square(8, 5))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun rookTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun rookTrajectory(start: Square, end: Square): List<Square> {
+    return if (start == end) listOf(start)
+    else if (start.column == end.column || start.row == end.row) listOf(start, end)
+    else if (start.column - end.column > start.row - end.row) listOf(start, Square(end.column, start.row), end)
+    else listOf(start, Square(start.column, end.row), end)
+}
 
 /**
  * Простая
