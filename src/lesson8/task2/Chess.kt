@@ -38,8 +38,8 @@ fun square(notation: String): Square {
     if (notation.length != 2) throw IllegalArgumentException()
     val data = notation.split("").filter { it != "" }
     val column = data[0][0]
-    val row = data[1].toInt()
-    if (column in 'a'..'h' && row in 1..8) return Square(column.toInt() + 1 - 'a'.toInt(), row)
+    val row = data[1][0]
+    if (column in 'a'..'h' && row in '1'..'8') return Square(column.toInt() + 1 - 'a'.toInt(), row.toString().toInt())
     else throw IllegalArgumentException()
 }
 
@@ -67,8 +67,8 @@ fun square(notation: String): Square {
  * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
  */
 fun rookMoveNumber(start: Square, end: Square): Int {
-    if (start == end) return 0
     if (!(start.inside() && end.inside())) throw IllegalArgumentException()
+    if (start == end) return 0
     return if (start.column == end.column || start.row == end.row) 1 else 2
 }
 
