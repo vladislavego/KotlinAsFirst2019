@@ -39,7 +39,7 @@ class Tests {
         assertEquals(Square(4, 1), square("d1"))
     }
 
-    @Test
+        @Test
     @Tag("Easy")
     fun rookMoveNumber() {
         assertEquals(0, rookMoveNumber(square("e3"), square("e3")))
