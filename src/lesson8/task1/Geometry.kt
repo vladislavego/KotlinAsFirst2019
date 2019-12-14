@@ -15,6 +15,8 @@ data class Point(val x: Double, val y: Double) {
      * Рассчитать (по известной формуле) расстояние между двумя точками
      */
     fun distance(other: Point): Double = sqrt(sqr(x - other.x) + sqr(y - other.y))
+
+    fun middle(other: Point): Point = Point((x + other.x) / 2, (y + other.y) / 2)
 }
 
 /**
@@ -132,7 +134,7 @@ fun diameter(vararg points: Point): Segment {
  */
 fun circleByDiameter(diameter: Segment): Circle {
     val radius = sqrt(sqr(abs(diameter.begin.x - diameter.end.x)) + sqr(abs(diameter.begin.y - diameter.end.y))) / 2.0
-    val center = Point((diameter.begin.x + diameter.end.x) / 2, (diameter.begin.y + diameter.end.y) / 2)
+    val center = diameter.begin.middle(diameter.end)
     return Circle(center, radius)
 }
 
@@ -195,13 +197,11 @@ fun lineByPoints(a: Point, b: Point): Line = lineBySegment(Segment(a, b))
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line {
-    val middlePoint = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
-    return Line(
-        middlePoint, if (lineByPoints(a, b).angle >= PI / 2) lineByPoints(a, b).angle - PI / 2
-        else lineByPoints(a, b).angle + PI / 2
-    )
-}
+fun bisectorByPoints(a: Point, b: Point) = Line(
+    a.middle(b), if (lineByPoints(a, b).angle >= PI / 2) lineByPoints(a, b).angle - PI / 2
+    else lineByPoints(a, b).angle + PI / 2
+)
+
 
 /**
  * Средняя
