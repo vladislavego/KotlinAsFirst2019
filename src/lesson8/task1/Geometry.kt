@@ -179,7 +179,7 @@ fun lineBySegment(s: Segment): Line {
     val segmentLength = s.begin.distance(s.end)
     val sideLength = s.end.distance(Point(s.end.x, s.begin.y))
     val angle = asin(sideLength / segmentLength)
-    return Line(s.begin, angle)
+    return Line(s.begin.middle(s.end), angle)
 }
 
 /**
