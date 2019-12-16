@@ -70,7 +70,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
         for (string in stringsOfText) {
             val entryNumber = Regex(newStr).findAll(string.toLowerCase()).count()
             if (entryNumber != 0 && equal) {
-                val stringToList = string.split("").toMutableList()
+                val stringToList = string.split("").filter { it != "" }.toMutableList()
                 for (i in Regex(newStr).find(string.toLowerCase())!!.range) {
                     stringToList.removeAt(i)
                     val newString = stringToList.joinToString("").toLowerCase()
