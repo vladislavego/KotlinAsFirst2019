@@ -92,6 +92,10 @@ Basic, Ruby, Swift.
             mapOf("аА" to 1),
             countSubstrings("input/substrings_in7.txt", listOf("аА"))
         )
+        assertEquals(
+            mapOf("щЩ" to 2),
+            countSubstrings("input/substrings_in8.txt", listOf("щЩ"))
+        )
     }
 
     @Test

@@ -68,17 +68,20 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
         val newStr = listOfChars.joinToString(separator = "").toLowerCase()
         listOfChars.clear()
         for (string in stringsOfText) {
-            val entryNumber = Regex(newStr).findAll(string.toLowerCase()).count()
-            if (entryNumber != 0 && equal) {
-                val stringToList = string.split("").filter { it != "" }.toMutableList()
-                for (i in Regex(newStr).find(string.toLowerCase())!!.range) {
-                    stringToList.removeAt(i)
-                    val newString = stringToList.joinToString("").toLowerCase()
-                    count += Regex(newStr).findAll(newString).count()
-                    break
+            val listOfStrings = string.split(" ")
+            for (s in listOfStrings) {
+                val entryNumber = Regex(newStr).findAll(s.toLowerCase()).count()
+                if (entryNumber != 0 && equal) {
+                    val stringToList = s.split("").filter { it != "" }.toMutableList()
+                    for (i in Regex(newStr).find(s.toLowerCase())!!.range) {
+                        stringToList.removeAt(i)
+                        val newString = stringToList.joinToString("").toLowerCase()
+                        count += Regex(newStr).findAll(newString).count()
+                        break
+                    }
                 }
+                count += entryNumber
             }
-            count += entryNumber
         }
         strInText[str] = count
     }
