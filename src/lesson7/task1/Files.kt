@@ -127,11 +127,13 @@ fun centerFile(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var maxLength = 0
     for (s in strings) {
-        if (s.trim().length > maxLength) maxLength = s.trim().length
+        val stringLenght = s.trim().length
+        if (stringLenght > maxLength) maxLength = stringLenght
     }
     for (s in strings) {
-        val space = (maxLength - s.trim().length) / 2
-        val stringToList = s.trim().split("").toMutableList()
+        val string = s.trim()
+        val space = (maxLength - string.length) / 2
+        val stringToList = string.split("").toMutableList()
         for (i in 1..space) {
             stringToList.add(0, " ")
         }
