@@ -1,7 +1,8 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson8.task1
-import kotlin.math.abs
+
+import kotlin.math.*
 
 /**
  * Точка (гекс) на шестиугольной сетке.
@@ -37,10 +38,14 @@ data class HexPoint(val x: Int, val y: Int) {
      * Расстояние вычисляется как число единичных отрезков в пути между двумя гексами.
      * Например, путь межу гексами 16 и 41 (см. выше) может проходить через 25, 34, 43 и 42 и имеет длину 5.
      */
-    fun distance(other: HexPoint): Int {
-        if (x == other.x) return abs(y - other.y)
-        if (y == other.y) return abs(x - other.x)
-        return abs(y - other.y) + abs(x - abs(y - other.y) - other.x)
+    fun distance(other: HexPoint): Int = when {
+        (x == other.x) -> abs(y - other.y)
+        (y == other.y) -> abs(x - other.x)
+        (abs(x - other.x) == abs(y - other.y)) -> abs(y - other.y) + abs(x - abs(y - other.y) - other.x)
+        else -> min(
+            abs(x - other.x) + abs(y - abs(x - other.x) - other.y),
+            abs(y - other.y) + abs(x - abs(y - other.y) - other.x)
+        )
     }
 
     override fun toString(): String = "$y.$x"
