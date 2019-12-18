@@ -192,7 +192,48 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
  */
-fun top20Words(inputName: String): Map<String, Int> = TODO()
+fun top20Words(inputName: String): Map<String, Int> {
+    val strings = File(inputName).readLines()
+    val listsOfWords = mutableListOf<List<String>>()
+    for (string in strings) {
+        listsOfWords.add(Regex("""[^a-zA-Zа-яА-ЯёЁ]""").split(string.trim()).filter { it != "" }
+            .map { word -> word.toLowerCase() })
+    }
+    val setsOfWords = listsOfWords.toSet()
+    val setOfWords = mutableSetOf<String>()
+    for (set in setsOfWords) {
+        setOfWords += set
+    }
+    val wordInText = mutableListOf<String>()
+    val countInText = mutableListOf<Int>()
+    for (word in setOfWords) {
+        wordInText.add(word)
+        var count = 0
+        for (list in listsOfWords) {
+            count += list.count { it == word }
+        }
+        countInText.add(count)
+    }
+    for (i in 1 until countInText.size) {
+        var k = i
+        while (k > 0 && countInText[k] > countInText[k - 1]) {
+            val tmp = countInText[k]
+            countInText[k] = countInText[k - 1]
+            countInText[k - 1] = tmp
+            val pos = wordInText[k]
+            wordInText[k] = wordInText[k - 1]
+            wordInText[k - 1] = pos
+            --k
+        }
+    }
+    val mapOfWord = mutableMapOf<String, Int>()
+    var i = 0
+    while (mapOfWord.size != wordInText.size && i < 20) {
+        mapOfWord[wordInText[i]] = countInText[i]
+        ++i
+    }
+    return mapOfWord
+}
 
 /**
  * Средняя
