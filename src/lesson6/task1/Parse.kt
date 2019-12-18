@@ -288,12 +288,12 @@ fun firstDuplicateIndex(str: String): Int {
  * Все цены должны быть больше либо равны нуля.
  */
 fun mostExpensive(description: String): String {
-    val data = description.split(";").filter { string -> string != "" }.map { string ->
-        string.trim()
-    }.map { string -> string.split(" ").filter { it != "" } }
+    val data = description.split(";").map { string ->
+        string.trim().split(" ")
+    }
     val namesWithPrices = mutableListOf<String>()
-    for (element in data) {
-        for (string in element) {
+    for (list in data) {
+        for (string in list) {
             namesWithPrices.add(string)
         }
     }
