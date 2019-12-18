@@ -291,7 +291,6 @@ fun hasAnagrams(words: List<String>): Boolean {
  *        )
  */
 
-
 fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
     val handshakes = mutableMapOf<String, Set<String>>()
     val names = mutableSetOf<String>()
@@ -304,11 +303,12 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
                 handshakes[name] = setOf()
             }
         }
-
         handshakes[key] = value + names - key
         names.clear()
     }
-    return handshakes
+    if (friends.all { it.value == handshakes[it.key] }) return handshakes
+    println(handshakes)
+    return propagateHandshakes(handshakes)
 }
 
 
