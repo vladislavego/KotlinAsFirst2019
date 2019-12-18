@@ -2,8 +2,6 @@
 
 package lesson5.task1
 
-import kotlin.math.*
-
 /**
  * Пример
  *
@@ -293,7 +291,23 @@ fun hasAnagrams(words: List<String>): Boolean {
  *        )
  */
 
-fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
+fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
+    val handshakes = mutableMapOf<String, Set<String>>()
+    val names = mutableSetOf<String>()
+    for ((key, value) in friends) {
+        for (name in value) {
+            if (name in friends) {
+                val friendsNames = friends[name]
+                if (friendsNames != null) names += friendsNames
+            } else {
+                handshakes[name] = setOf()
+            }
+        }
+
+        handshakes[key] = value + names - key
+    }
+    return handshakes
+}
 
 
 /**
@@ -325,7 +339,6 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     }
     return indexPair
 }
-
 
 
 /**
