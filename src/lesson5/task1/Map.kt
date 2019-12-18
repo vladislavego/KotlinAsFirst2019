@@ -92,7 +92,17 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
 
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+    val studentsGrades = mutableMapOf<Int, List<String>>()
+    for ((_, value) in grades) {
+        val names = mutableListOf<String>()
+        for ((name, _) in grades) {
+            if (grades[name] == value) names.add(name)
+        }
+        studentsGrades[value] = names
+    }
+    return studentsGrades
+}
 
 /**
  * Простая
@@ -293,18 +303,18 @@ fun hasAnagrams(words: List<String>): Boolean {
 
 fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> {
     val handshakes = mutableMapOf<String, Set<String>>()
-    val names = mutableSetOf<String>()
+    val friendsNames = mutableSetOf<String>()
     for ((key, value) in friends) {
         for (name in value) {
             if (name in friends) {
-                val friendsNames = friends[name]
-                if (friendsNames != null) names += friendsNames
+                val names = friends[name]
+                if (names != null) friendsNames += names
             } else {
                 handshakes[name] = setOf()
             }
         }
-        handshakes[key] = value + names - key
-        names.clear()
+        handshakes[key] = value + friendsNames - key
+        friendsNames.clear()
     }
     if (friends.all { it.value == handshakes[it.key] }) return handshakes
     return propagateHandshakes(handshakes)
