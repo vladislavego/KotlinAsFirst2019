@@ -307,7 +307,6 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
         names.clear()
     }
     if (friends.all { it.value == handshakes[it.key] }) return handshakes
-    println(handshakes)
     return propagateHandshakes(handshakes)
 }
 
